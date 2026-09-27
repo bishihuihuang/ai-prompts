@@ -2,12 +2,100 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=./AI提示词系统/AI提示词管理.html">
 <title>AI 提示词库</title>
 <link rel="icon" href="./favicon.svg">
 <link rel="manifest" href="./manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0e1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  background:radial-gradient(1200px 640px at 50% -12%, #1b2342 0%, #0b0e1a 55%, #060812 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Segoe UI","Microsoft YaHei",sans-serif;
+  color:#e8eaf6;-webkit-font-smoothing:antialiased;
+}
+#stars{position:fixed;inset:0;z-index:0}
+.wrap{position:relative;z-index:1;text-align:center;transform:translateY(-5vh);padding:0 20px}
+.logo{
+  width:86px;height:86px;margin:0 auto 28px;border-radius:24px;
+  background:linear-gradient(135deg,#fbe08b 0%,#f6c453 40%,#d99a2b 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:44px;box-shadow:0 16px 46px rgba(240,170,60,.38),inset 0 1px 0 rgba(255,255,255,.4);
+  animation:logoIn .95s cubic-bezier(.2,1.5,.4,1) both;
+}
+@keyframes logoIn{0%{transform:scale(.35) rotate(-14deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.title{
+  font-size:34px;font-weight:700;letter-spacing:7px;
+  background:linear-gradient(90deg,#ffffff 0%,#f6d365 45%,#fbe08b 60%,#ffffff 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:titleIn 1.05s .18s ease both,shimmer 3.4s 1.3s ease-in-out infinite;
+}
+@keyframes titleIn{0%{opacity:0;transform:translateY(24px);filter:blur(9px)}100%{opacity:1;transform:none;filter:blur(0)}}
+@keyframes shimmer{0%,100%{background-position:0% 0}50%{background-position:-220% 0}}
+.sub{
+  margin-top:15px;font-size:13px;letter-spacing:3px;color:#93a7cc;opacity:0;
+  animation:fadeIn .9s .55s ease both;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.bar-wrap{
+  margin:38px auto 0;width:210px;height:3px;border-radius:2px;
+  background:rgba(255,255,255,.12);overflow:hidden;
+}
+.bar{
+  height:100%;width:100%;border-radius:2px;
+  background:linear-gradient(90deg,#f6d365,#e0b13c);
+  transform:scaleX(0);transform-origin:left;
+  animation:load 1.65s .6s cubic-bezier(.65,0,.35,1) forwards;
+}
+@keyframes load{to{transform:scaleX(1)}}
+.hint{margin-top:20px;font-size:11px;color:#5d6f96;letter-spacing:2px;opacity:0;animation:fadeIn .8s 1.1s ease both}
+.dot{display:inline-block;animation:blink 1.2s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.18s}.dot:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,60%,100%{opacity:.15}30%{opacity:1}}
+@media (max-width:480px){
+  .title{font-size:26px;letter-spacing:5px}
+  .logo{width:70px;height:70px;font-size:36px}
+  .sub{font-size:11px;letter-spacing:2px}
+}
+</style>
 </head>
 <body>
-<p>正在进入 <a href="./AI提示词系统/AI提示词管理.html">AI 提示词库</a>…</p>
+<canvas id="stars"></canvas>
+<div class="wrap">
+  <div class="logo">✨</div>
+  <div class="title">AI 提示词库</div>
+  <div class="sub">集中管理 · 标签分类 · 状态标记 · 导出备份</div>
+  <div class="bar-wrap"><div class="bar"></div></div>
+  <div class="hint">正在进入<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+</div>
+<script>
+(function(){
+  var c=document.getElementById('stars'),x=c.getContext('2d'),w,h,pts=[];
+  function rs(){
+    w=c.width=innerWidth;h=c.height=innerHeight;
+    pts=Array.from({length:Math.min(90,Math.round(w*h/26000))},function(){
+      return{x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.7+.4,v:Math.random()*.5+.25,o:Math.random()};
+    });
+  }
+  addEventListener('resize',rs);rs();
+  (function dr(){
+    x.clearRect(0,0,w,h);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];p.y-=p.v;
+      if(p.y<-4){p.y=h+4;p.x=Math.random()*w;}
+      x.beginPath();x.arc(p.x,p.y,p.r,0,7);
+      x.fillStyle='rgba(246,211,101,'+(0.30+0.5*p.o).toFixed(2)+')';
+      x.fill();
+    }
+    requestAnimationFrame(dr);
+  })();
+  setTimeout(function(){document.body.style.transition='opacity .75s ease';document.body.style.opacity='0';},2100);
+  setTimeout(function(){location.replace('./AI提示词系统/AI提示词管理.html');},2950);
+})();
+</script>
 </body>
 </html>
