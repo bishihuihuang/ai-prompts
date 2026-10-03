@@ -2,12 +2,15 @@
   "name": "AI 提示词库",
   "short_name": "AI提示词",
   "description": "55 套精选提示词 · 24 主题 · 本地存储",
+  "lang": "zh-CN",
+  "id": "./",
   "start_url": "./AI提示词系统/AI提示词管理.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0b0e1a",
-  "theme_color": "#7aa8ff",
+  "theme_color": "#0b0e1a",
   "icons": [
-    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
   ]
 }

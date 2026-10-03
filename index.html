@@ -93,6 +93,11 @@ body{
     }
     requestAnimationFrame(dr);
   })();
+  // 修缮 2026-10-04：注册 Service Worker（须在会话判断之前，保证每次入口访问都注册）
+  if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){navigator.serviceWorker.register("./sw.js").catch(function(){});}
+  // 修缮 2026-10-04：本次会话已看过开场动画则直接进入，不再重复等待
+  var seen=false;try{seen=!!sessionStorage.getItem('splashShown');sessionStorage.setItem('splashShown','1');}catch(e){}
+  if(seen){location.replace('./AI提示词系统/AI提示词管理.html');return;}
   setTimeout(function(){document.body.style.transition='opacity .75s ease';document.body.style.opacity='0';},2100);
   setTimeout(function(){location.replace('./AI提示词系统/AI提示词管理.html');},2950);
 })();
