@@ -4,7 +4,7 @@
  *  - 其余静态资源（图片等）：缓存优先 + 后台静默更新 → 秒开
  *  - 缓存名含构建时间戳：构建时由 构建工具/混淆.js 自动替换 __BUILD__，每次发版全量换新缓存
  */
-const CACHE = 'ai-prompts-202610071152';
+const CACHE = 'ai-prompts-202610071315';
 const CORE = [
   './',
   './index.html',
